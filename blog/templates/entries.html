@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Wpisy na blogu</h2>
+<ul>
+{% for entry in entries %}
+    <li>
+        <h3>{{ entry.title }}</h3>
+        <p>{{ entry.body }}</p>
+        <p><small>Opublikowano: {{ entry.pub_date.strftime('%d.%m.%Y') }}</small></p>
+    </li>
+{% endfor %}
+</ul>
+<div>
+{% if entries.has_prev %}
+    <a href="{{ url_for('index', page=entries.prev_num) }}">Poprzednia strona</a>
+{% endif %}
+{% if entries.has_next %}
+    <a href="{{ url_for('index', page=entries.next_num) }}">Następna strona</a>
+{% endif %}
+</div>
+{% endblock %}
