@@ -4,18 +4,18 @@
 
 <h3>Dodaj nowy wpis</h3>
 
-<form action="" method="POST">
-    {{form.hidden.tag()}}
+<form action="{{ url_for('create_entry') }}" method="POST">
+    {{ form.hidden_tag() }}
     <div class="form-group">
         <label for="title">Tytuł wpisu</label>
-        {{ form.title(class_='form-control') }}
+        {{ form.title(id='title', class_='form-control') }}
     </div>
     <div class="form-group">
         <label for="body">Treść</label>
-        {{ form.body(class_="form-control", cols="100", rows="20") }}
+        {{ form.body(id='body', class_="form-control", cols="100", rows="20") }}
     </div>
     <div class="form-check">
-        {{ form.is_published(class_='form-check-input') }}
+        {{ form.is_published(id='is_published', class_='form-check-input') }}
         <label class="form-check-label" for="is_published">Wpis opublikowany</label>
     </div>
     <button class="btn btn-primary mt-5" type="submit">Zapisz</button>
