@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if entry.is_published %}
+<h2>{{ entry.title }}</h2>
+<p>{{ entry.body }}</p>
+<p><small>Opublikowano: {{ entry.pub_date.strftime('%d.%m.%Y') }}</small></p>
+<div>
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Wróć do listy wpisów</a>
+    <a class="btn btn-secondary" href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edytuj wpis</a>
+</div>
+{% else %}
+<p>Wpis oczekuje na publikację</p>
+<div>
+    <a class="btn btn-primary" href="{{ url_for('index') }}">Wróć do listy wpisów</a>
+    <a class="btn btn-secondary" href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edytuj wpis</a>
+</div>
+
+{% endif %}
+{% endblock %}
