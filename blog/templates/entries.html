@@ -5,13 +5,14 @@
 <ul>
 {% for entry in entries.items %}
     <li>
-        <h3><a href="{{ entry.get_absolute_url() }}">{{ entry.title }}</a></h3>
-        <p>{{ entry.body }}</p>
         {% if entry.is_published %}
-        <p><small>Opublikowano: {{ entry.pub_date.strftime('%d.%m.%Y') }}</small></p>
-        {% else %}
-        <p><small>Wpis czeka na publikację</small></p>
-        {% endif %}
+            <h3><a href="{{ entry.get_absolute_url() }}">{{ entry.title }}</a></h3>
+            <p>{{ entry.body[:20] }}{% if entry.body|length > 20 %}...{% endif %}</p>
+            <p><small>Opublikowano: {{ entry.pub_date.strftime('%d.%m.%Y') }} przez {{ entry.author.name }}</small></p>
+            {% else %}
+            <h3><a href="{{ entry.get_absolute_url() }}">{{ entry.title }}</a></h3>
+            <p><small>Wpis czeka na publikację</small></p>
+            {% endif %}
     </li>
 {% endfor %}
 </ul>
