@@ -7,14 +7,23 @@
 <p><small>Opublikowano: {{ entry.pub_date.strftime('%d.%m.%Y') }} przez {{ entry.author.name }}</small></p>
 <div>
     <a class="btn btn-primary" href="{{ url_for('index') }}">Wróć do listy wpisów</a>
+    {% if current_user.is_authenticated and current_user.id == entry.author.id %}
     <a class="btn btn-secondary" href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edytuj wpis</a>
+    <form action="{{ url_for('delete_entry', entry_id=entry.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger">Usuń wpis</button>
+    </form>
+    {% endif %}
 </div>
 {% else %}
 <p>Wpis oczekuje na publikację</p>
 <div>
     <a class="btn btn-primary" href="{{ url_for('index') }}">Wróć do listy wpisów</a>
+    {% if current_user.is_authenticated and current_user.id == entry.author.id %}
     <a class="btn btn-secondary" href="{{ url_for('edit_entry', entry_id=entry.id) }}">Edytuj wpis</a>
+    <form action="{{ url_for('delete_entry', entry_id=entry.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger">Usuń wpis</button>
+    </form>
+    {% endif %}
 </div>
-
 {% endif %}
 {% endblock %}
